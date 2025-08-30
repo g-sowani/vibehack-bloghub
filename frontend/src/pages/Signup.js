@@ -30,7 +30,7 @@ const Signup = () => {
     setSuccess('');
     
     try {
-      await axios.post('/api/auth/signup', { username, email, password, role });
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/signup`, { username, email, password, role });
       setSuccess('Account created successfully! Redirecting to login...');
       setTimeout(() => {
         navigate('/login');
