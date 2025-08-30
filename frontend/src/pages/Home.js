@@ -47,10 +47,10 @@ const Home = () => {
       console.log("Fetching blogs with token:", token ? "Token exists" : "No token");
       
       const [approvedRes, pendingRes] = await Promise.all([
-        axios.get("/api/blogs/", {
+        axios.get(`${process.env.REACT_APP_API_URL}/api/blogs/`, {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        axios.get("/api/blogs/pending", {
+        axios.get(`${process.env.REACT_APP_API_URL}/api/blogs/pending`, {
           headers: { Authorization: `Bearer ${token}` },
         }),
       ]);
@@ -100,10 +100,10 @@ const Home = () => {
     const token = localStorage.getItem("token");
     try {
       const [approvedRes, pendingRes] = await Promise.all([
-        axios.get("/api/blogs/", {
+        axios.get(`${process.env.REACT_APP_API_URL}/api/blogs/`, {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        axios.get("/api/blogs/pending", {
+        axios.get(`${process.env.REACT_APP_API_URL}/api/blogs/pending`, {
           headers: { Authorization: `Bearer ${token}` },
         }),
       ]);
@@ -156,7 +156,7 @@ const Home = () => {
     try {
       console.log("Creating blog with data:", { title, content });
       const response = await axios.post(
-        "/api/blogs/",
+        `${process.env.REACT_APP_API_URL}/api/blogs/`,
         { title, content },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -197,7 +197,7 @@ const Home = () => {
 
     try {
       await axios.put(
-        `/api/blogs/${blogId}/status`,
+        `${process.env.REACT_APP_API_URL}/api/blogs/${blogId}/status`,
         { status },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -226,7 +226,7 @@ const Home = () => {
 
     try {
       await axios.post(
-        `/api/blogs/${blogId}/like`,
+        `${process.env.REACT_APP_API_URL}/api/blogs/${blogId}/like`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -254,7 +254,7 @@ const Home = () => {
 
     try {
       await axios.post(
-        `/api/blogs/${blogId}/comments`,
+        `${process.env.REACT_APP_API_URL}/api/blogs/${blogId}/comments`,
         { content: commentContent },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -279,7 +279,7 @@ const Home = () => {
 
     try {
       await axios.delete(
-        `/api/blogs/${blogId}/comments/${commentId}`,
+        `${process.env.REACT_APP_API_URL}/api/blogs/${blogId}/comments/${commentId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       await fetchBlogs();
